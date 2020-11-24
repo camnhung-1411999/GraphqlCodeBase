@@ -6,9 +6,9 @@ import { Field, ObjectType } from 'type-graphql';
 import { IsEmail } from 'class-validator';
 import { ObjectId } from 'mongodb';
 import { AuthToken } from './authToken.type';
-import { ObjectIdScalar } from '../../../../../Scalars/ObjectId.scalars';
-import { SortOrder } from '../../../../../Scalars/Sort.type';
-import { Error } from '../../../../../Scalars/Error.type';
+import { ObjectIdScalar } from '../../../../Scalars/ObjectId.scalars';
+import { SortOrder } from '../../../../Scalars/Sort.type';
+import { Error } from '../../../../Scalars/Error.type';
 
 @ObjectType()
 export class User {

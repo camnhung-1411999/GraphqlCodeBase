@@ -29,13 +29,11 @@ class Server {
 
   private Schema: any;
 
-  private db: any;
 
   private serviceRegistry: ServiceRegistry;
 
   constructor() {
     this.App = express();
-    this.db = new Database();
     this.serviceRegistry = new ServiceRegistry(logger);
     const hooksRegistry = new HooksRegistry(this.serviceRegistry, logger);
     hooksRegistry.init();
@@ -91,8 +89,8 @@ class Server {
 
   async Start() {
     await this.graphQl();
-    await this.db;
     new Playground().Init(this.App);
+    new Database();
     Jwt.init(passport, this.serviceRegistry);
     this.App.use(passport.initialize());
     this.App.listen(graphqlConfig.port, () => {

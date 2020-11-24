@@ -4,12 +4,12 @@ import {
 import * as yup from 'yup';
 import { isEmpty } from 'lodash';
 import { UserPayload, UserPayloads } from './type/user.type';
-import UserHandler from '../../service/user.service';
+import UserHandler from '../service/user.service';
 import {
   UserInputType,
 } from './type/user.input';
-import { AWSS3Uploader } from '../../../../App/AWS';
-import { IUser } from '../../service/user.model';
+import { AWSS3Uploader } from '../../../App/AWS';
+import { IUser } from '../service/user.model';
 
 @Resolver()
 export class UserResolver {

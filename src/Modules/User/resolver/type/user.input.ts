@@ -6,8 +6,8 @@ import { InputType, Field } from 'type-graphql';
 import { ObjectId } from 'mongodb';
 import { GraphQLUpload } from 'graphql-upload';
 import { IsEmail } from 'class-validator';
-import { ObjectIdScalar } from '../../../../../Scalars/ObjectId.scalars';
-import { SortOrderInput } from '../../../../../Scalars/Sort.type';
+import { ObjectIdScalar } from '../../../../Scalars/ObjectId.scalars';
+import { SortOrderInput } from '../../../../Scalars/Sort.type';
 
 @InputType()
 export class UserInputType {
