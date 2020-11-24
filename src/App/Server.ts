@@ -14,7 +14,6 @@ import { Playground } from './Playground';
 import { Context } from './Context';
 import { LogAccessMiddleware } from '../Middlewares/logAccess.middleware';
 import { AuthenticationMiddleware } from '../Middlewares/authentication.middleware';
-import { AuthenCutomerMiddleware } from '../Middlewares/authenCustomer.middleware';
 import ServiceRegistry from '../Services/resgistry';
 import { ObjectIdScalar } from '../Scalars/ObjectId.scalars';
 import { ErrorMiddleware } from '../Middlewares/error.middleware';
@@ -48,7 +47,7 @@ class Server {
         path.resolve(__dirname, '../Modules/**/*.resolver.{ts,js}'),
         path.resolve(__dirname, '../Modules/**/**/*.resolver.{ts,js}')],
       globalMiddlewares:
-        [ErrorMiddleware, AuthenticationMiddleware, AuthenCutomerMiddleware, LogAccessMiddleware, ValidationMiddleware, HookMiddleware],
+        [ErrorMiddleware, AuthenticationMiddleware, LogAccessMiddleware, ValidationMiddleware, HookMiddleware],
       scalarsMap: [
         { type: ObjectId, scalar: ObjectIdScalar },
       ],
