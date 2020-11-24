@@ -1,0 +1,8 @@
+{
+    "watch": ["src"],
+    "ext": "ts",
+    "ignore": [
+      "src/Modules/Api"
+    ],
+    "exec": "ts-node ./src/App/server.ts --ignoreCatch"
+  }
