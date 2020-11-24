@@ -1,11 +1,9 @@
 import { Strategy as JwtStrategy, ExtractJwt } from 'passport-jwt';
 import { get } from 'lodash';
 import ServiceRegistry from '../Services/resgistry';
-import { jwtConfig, jwtCustomer } from './Config';
-import UserHandler from '../Modules/User/resolver/user/service';
-import CustomerHandler from '../Modules/Customer/Customer/service';
-import { CustomerId } from '../Modules/Customer/Customer/proto/customer_pb';
-import { UserRequest } from '../Modules/User/proto/user/user_pb';
+import { jwtConfig } from './Config';
+import UserHandler from '../Modules/User/service/user.service';
+import UserCollection from '../Modules/User/service/user.model';
 
 const Jwt = {
   init(passport: any, serviceRegistry: ServiceRegistry) {
@@ -27,8 +25,8 @@ const Jwt = {
           const userId = get(token, 'sub');
           if (userId) {
             try {
-              const info = new UserRequest();
-              info.setId(userId);
+              const info = new UserCollection();
+              info.id = userId;
               const user = await userService.detail(info);
               done(null, user);
             } catch (err) {
@@ -40,37 +38,37 @@ const Jwt = {
         }
       )
     );
-    passport.use(
-      'jwt-customer',
-      new JwtStrategy(
-        {
-          secretOrKey: jwtCustomer.accessTokenSecret,
-          issuer: jwtCustomer.iscustomer,
-          audience: jwtCustomer.audience,
-          jwtFromRequest: ExtractJwt.fromExtractors([
-            (req) => get(req, 'headers.authorization'),
-          ]),
-        },
-        async (token, done) => {
-          const {
-            customerService,
-          }: { customerService: CustomerHandler } = serviceRegistry.services;
-          const customerId = get(token, 'sub');
-          if (customerId) {
-            try {
-              const infor = new CustomerId();
-              infor.setId(customerId);
-              const customer = await customerService.detailCustomer(infor);
-              done(null, customer);
-            } catch (error) {
-              done(error);
-            }
-          } else {
-            done(null);
-          }
-        }
-      )
-    );
+  //   passport.use(
+  //     'jwt-customer',
+  //     new JwtStrategy(
+  //       {
+  //         secretOrKey: jwtCustomer.accessTokenSecret,
+  //         issuer: jwtCustomer.iscustomer,
+  //         audience: jwtCustomer.audience,
+  //         jwtFromRequest: ExtractJwt.fromExtractors([
+  //           (req) => get(req, 'headers.authorization'),
+  //         ]),
+  //       },
+  //       async (token, done) => {
+  //         const {
+  //           customerService,
+  //         }: { customerService: CustomerHandler } = serviceRegistry.services;
+  //         const customerId = get(token, 'sub');
+  //         if (customerId) {
+  //           try {
+  //             const infor = new CustomerId();
+  //             infor.setId(customerId);
+  //             const customer = await customerService.detailCustomer(infor);
+  //             done(null, customer);
+  //           } catch (error) {
+  //             done(error);
+  //           }
+  //         } else {
+  //           done(null);
+  //         }
+  //       }
+  //     )
+  //   );
   },
 };
 
